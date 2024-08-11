@@ -7,7 +7,7 @@ from frappe.app import handle_exception as frappe_handle_exception
 from frappe.utils.background_jobs import start_worker as frappe_start_worker
 
 
-def sentry_log_error(title=None, message=None, reference_doctype=None, reference_name=None):
+def sentry_log_error(title=None, message=None, reference_doctype=None, reference_name=None, *args, **kwargs):
 	"""Log error to Frappe Error Log and forward to Sentry"""
 	from sentry.sentry.utils import capture_exception
 
@@ -16,10 +16,10 @@ def sentry_log_error(title=None, message=None, reference_doctype=None, reference
 	except Exception as e:
 		print("error capturing exception", e)
 	finally:
-		frappe_log_error(title, message, reference_doctype, reference_name)
+		frappe_log_error(title, message, reference_doctype, reference_name, *args, **kwargs)
 
 
-def start_worker_with_sentry_logging(queue=None, quiet=False, rq_username=None, rq_password=None):
+def start_worker_with_sentry_logging(queue=None, quiet=False, rq_username=None, rq_password=None, *args, **kwargs):
 	"""Wrapper to start rq worker. Connects to redis and monitors these queues. Includes a Sentry integration"""
 	from sentry.sentry.utils import init_sentry
 
@@ -28,7 +28,7 @@ def start_worker_with_sentry_logging(queue=None, quiet=False, rq_username=None, 
 	except Exception as e:
 		print("error starting worker", e)
 	finally:
-		frappe_start_worker(queue, quiet, rq_username, rq_password)
+		frappe_start_worker(queue, quiet, rq_username, rq_password, *args, **kwargs)
 
 
 def sentry_handle_exception(e):
