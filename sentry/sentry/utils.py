@@ -7,6 +7,9 @@ def init_sentry():
 	sentry_details = get_sentry_details()
 	if not sentry_details or not sentry_details.dsn:
 		return
+	
+	print("fintechsysinit")
+	print(sentry_enabled())
 
 	if sentry_enabled():
 		sentry_sdk.init(
@@ -21,6 +24,10 @@ def init_sentry():
 
 
 def capture_exception(title=None, message=None, reference_doctype=None, reference_name=None):
+	print("******************************************8")
+	print("******************************************8")
+	print("******************************************8")
+	
 	init_sentry()
 
 	with sentry_sdk.configure_scope() as scope:
@@ -51,9 +58,9 @@ def get_sentry_details():
 
 def sentry_enabled():
 	enabled = True
-	if frappe.conf.get("developer_mode"):
-		# You can set this in site_config.json to enable sentry in developer mode
-		# ... enable_sentry_developer_mode: 1 ...
-		enabled = frappe.conf.get("enable_sentry_developer_mode", False)
+	# if frappe.conf.get("developer_mode"):
+	# 	# You can set this in site_config.json to enable sentry in developer mode
+	# 	# ... enable_sentry_developer_mode: 1 ...
+	# 	enabled = frappe.conf.get("enable_sentry_developer_mode", False)
 
 	return enabled

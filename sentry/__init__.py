@@ -9,6 +9,7 @@ from frappe.utils.background_jobs import start_worker as frappe_start_worker
 
 def sentry_log_error(title=None, message=None, reference_doctype=None, reference_name=None, *args, **kwargs):
 	"""Log error to Frappe Error Log and forward to Sentry"""
+	print("***********************************************")
 	from sentry.sentry.utils import capture_exception
 
 	try:
