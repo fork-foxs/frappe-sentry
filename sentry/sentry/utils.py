@@ -58,9 +58,9 @@ def get_sentry_details():
 
 def sentry_enabled():
 	enabled = True
-	# if frappe.conf.get("developer_mode"):
-	# 	# You can set this in site_config.json to enable sentry in developer mode
-	# 	# ... enable_sentry_developer_mode: 1 ...
-	# 	enabled = frappe.conf.get("enable_sentry_developer_mode", False)
+	if frappe.conf.get("developer_mode"):
+		# You can set this in site_config.json to enable sentry in developer mode
+		# ... enable_sentry_developer_mode: 1 ...
+		enabled = frappe.conf.get("enable_sentry_developer_mode", False)
 
 	return enabled
