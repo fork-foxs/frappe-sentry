@@ -8,8 +8,6 @@ def init_sentry():
 	if not sentry_details or not sentry_details.dsn:
 		return
 	
-	print("fintechsysinit")
-	print(sentry_enabled())
 
 	if sentry_enabled():
 		sentry_sdk.init(
@@ -23,11 +21,7 @@ def init_sentry():
 		)
 
 
-def capture_exception(title=None, message=None, reference_doctype=None, reference_name=None):
-	print("******************************************8")
-	print("******************************************8")
-	print("******************************************8")
-	
+def capture_exception(title=None, message=None, reference_doctype=None, reference_name=None):	
 	init_sentry()
 
 	with sentry_sdk.configure_scope() as scope:
